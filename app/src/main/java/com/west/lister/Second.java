@@ -18,19 +18,17 @@ import java.util.List;
 /**
  * Created by usr1 on 8/11/14.
  */
-public class Second extends ListFragment {
+public class Second extends Fragment { //if extends ListFragment then comment all class
 
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view =inflater.inflate(R.layout.second_layout, container, false);
 
-        return view;
+
+        return inflater.inflate(R.layout.second_layout, container, false);
     }
-
-
 
 }
 

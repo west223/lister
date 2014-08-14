@@ -2,6 +2,7 @@ package com.west.lister;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -46,6 +47,8 @@ public class MainActivity extends Activity{
          ab.setTitle(barTitle);         //action bar title
 
 
+//        FragmentManager fm = getFragmentManager();                //reference in main.xml
+//        Second second = (Second)fm.findFragmentById(R.id.second); // to show second ListFragment
 
 
         db = new TaskDBHelper(this);
@@ -54,7 +57,9 @@ public class MainActivity extends Activity{
         adapter = new ListerAdapter(this, R.layout.second_layout, list, null);
 
         final ListView listTask = (ListView) findViewById(R.id.listView1);
-        //listTask.setAdapter(adapter);
+//        listTask.setAdapter(adapter);
+
+
 
     }
 
@@ -69,19 +74,57 @@ public class MainActivity extends Activity{
         return true;
     }
 
+    public void btnAdd(View view){  //Button btnAdd from third_layout.xom
+
+        Fragment fr;
+        if (view == findViewById(R.id.btnAdd)){
+        fr = new Second();
+
+
+
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_main, fr);
+        fragmentTransaction.commit();
+              }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+//        int id = item.getItemId();
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case R.id.btnPlus:
+                //open fragment third
+                openAddTask();
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
+    public void openAddTask(){
 
+        //btnPlus must open add task (third_layout.xml)
+        Fragment fr;
+//        if (view == findViewById(R.id.btnPlus)){
+            fr = new Third_fragment();
+
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_main, fr);
+            fragmentTransaction.commit();
+  //      }
+    }
 
 
     public class ListerAdapter extends ArrayAdapter<Task>{

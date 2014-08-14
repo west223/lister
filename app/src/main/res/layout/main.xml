@@ -4,8 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:id="@+id/fragment_main" >
 
 
-
+    <!--<fragment-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:name="com.west.lister.Second"-->
+        <!--android:id="@+id/fragment_main"-->
+        <!--android:layout_gravity="right" />-->
 </LinearLayout>
