@@ -22,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +32,11 @@ public class MainActivity extends Activity{
 
     public TaskDBHelper db;
     public List<Task> list;
-    public ListerAdapter adapter;
+//    public Second.ListerAdapter adapter;
     public CheckBox checkBox1;
     public Button button;
     String barTitle = "Some List";
+    String s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,151 +48,40 @@ public class MainActivity extends Activity{
          ActionBar ab = getActionBar(); // action bar title
          ab.setTitle(barTitle);         //action bar title
 
-
-//        FragmentManager fm = getFragmentManager();                //reference in main.xml
-//        Second second = (Second)fm.findFragmentById(R.id.second); // to show second ListFragment
-
-
-        db = new TaskDBHelper(this);
-        list = db.getAllTasks();
-
-        adapter = new ListerAdapter(this, R.layout.second_layout, list, null);
-
-        final ListView listTask = (ListView) findViewById(R.id.listView1);
-//        listTask.setAdapter(adapter);
-
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.main, menu);
 
-        //My custom buttons on menu bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.my_bar, menu);
         return true;
     }
 
-    public void btnAdd(View view){  //Button btnAdd from third_layout.xom
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){ //ACTION BAR BUTTONS
 
-        Fragment fr;
-        if (view == findViewById(R.id.btnAdd)){
-        fr = new Second();
+            switch (item.getItemId()) {
+                case R.id.btnPlus:
+                    //open fragment third
+                    openAddTask();
 
+                    return true;
 
-
-
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_main, fr);
-        fragmentTransaction.commit();
-              }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-        switch (item.getItemId()){
-            case R.id.btnPlus:
-                //open fragment third
-                openAddTask();
-
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
-    }
 
     public void openAddTask(){
 
-        //btnPlus must open add task (third_layout.xml)
         Fragment fr;
-//        if (view == findViewById(R.id.btnPlus)){
             fr = new Third_fragment();
 
             FragmentManager fm = getFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_main, fr);
             fragmentTransaction.commit();
-  //      }
-    }
-
-
-    public class ListerAdapter extends ArrayAdapter<Task>{
-
-        Context context;
-        CheckBox chk;
-        public ListView listView1;
-
-
-
-        public List<Task> taskList = new ArrayList<Task>();
-
-        int layoutResourceId;
-
-        public ListerAdapter(Context context, int layoutResourceId, List<Task> objects, ListView listView){
-            super(context, layoutResourceId, objects);
-
-            this.layoutResourceId = layoutResourceId;
-            this.taskList = objects;
-            this.context = context;
-            this.listView1 = listView;
-
-        }
-
-        class ViewHolder{
-            TextView text;
-            CheckBox chk;
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent){
-
-            CheckBox chk = null;
-            if (convertView == null){
-                LayoutInflater inflater = (LayoutInflater) context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                                 // Layout ???
-                convertView = inflater.inflate(R.layout.second_layout, parent, false);
-                chk = (CheckBox)convertView.findViewById(R.id.checkBox1);
-                convertView.setTag(chk);
-
-                chk.setOnClickListener(new View.OnClickListener(){
-
-                    @Override
-                    public void onClick(View v) {
-                        CheckBox cb = (CheckBox) v;
-                        Task changeTask = (Task) cb.getTag();
-                        changeTask.setStatus(cb.isChecked() == true ? 1 : 0);
-
-                       db.updateTask(changeTask);
-                    }
-                });
-            }else {
-                chk = (CheckBox) convertView.getTag();
-            }
-
-            Task current = taskList.get(position);
-            chk.setText(current.getStatus());
-            chk.setChecked(current.getStatus() == 1 ? true : false);
-            chk.setTag(current);
-
-            return  convertView;
-        }
-
-        public List<Task> getTaskList(){
-            return taskList;
-        }
     }
 
 }

@@ -13,4 +13,8 @@
         <!--android:name="com.west.lister.Second"-->
         <!--android:id="@+id/fragment_main"-->
         <!--android:layout_gravity="right" />-->
+    <!--<ListView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/listView1" />-->
 </LinearLayout>
