@@ -17,6 +17,6 @@
         android:layout_height="wrap_content"
         android:text="Add"
         android:id="@+id/btnAdd" />
-        <!--android:onClick="onClick"/>-->
+
 
 </LinearLayout>
