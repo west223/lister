@@ -51,7 +51,7 @@ public class Second extends Fragment { //if extends ListFragment then can cos a 
 
         final ListView listTask = (ListView)getView().findViewById(R.id.listView1);
 
-        db = new TaskDBHelper(getActivity()); //reference to DDatabase
+        db = new TaskDBHelper(getActivity()); //reference to Database
         list =  db.getAllTasks();
 
         adapter = new ListerAdapter(getActivity(), R.layout.list_inner_view, list, null);
@@ -87,9 +87,11 @@ public class Second extends Fragment { //if extends ListFragment then can cos a 
 
             CheckBox chk = null;
             if (convertView == null){
+
                 LayoutInflater inflater = (LayoutInflater) context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+                    //inflater of main custom View
                 convertView = inflater.inflate(R.layout.list_inner_view, parent, false);
                 chk = (CheckBox)convertView.findViewById(R.id.checkBox1);
                 convertView.setTag(chk);

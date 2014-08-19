@@ -5,13 +5,11 @@
     android:layout_height="match_parent"
     android:background="#00FFFF"
     android:weightSum="1"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:layout_gravity="center_vertical">
+    >
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listView1"
-        android:layout_gravity="center_vertical"
         />
 </LinearLayout>

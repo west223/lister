@@ -67,11 +67,12 @@ public class Third_fragment extends Fragment{
                 String s = editTextTask.getText().toString();
                 if (s.equalsIgnoreCase("")) {
 
+                Toast.makeText(getActivity(), "Сначала введите задачу!", Toast.LENGTH_LONG).show();
                 } else{
                     Task task = new Task(s, 0);
                     db.addTask(task);
                     editTextTask.setText("");
-                    System.out.println(" tarrget: " + s);
+//                    System.out.println(" tarrget: " + s);
 
                     Fragment fr;
 
